@@ -9,6 +9,27 @@ let table=[
 
 ];
 
+let strTable = ""
+
+function updateTable(){
+	strTable = "["
+	for(let i = 0; i < table.length; i++){
+		strTable += "["
+		for(let j = 0; j < table[i].length; j++){
+			strTable += table[i][j]
+			if(j != table[i].length - 1){
+				strTable += ","
+			}
+		}
+		strTable += "]"
+		if(i != table.length - 1){
+			strTable += ","
+		}
+	}
+	strTable += "]"
+	table = strTable
+}
+
 
 
 </script>
@@ -42,6 +63,7 @@ let table=[
 		<input type="text" bind:value={varName} />
 		<h1>Copier le code ci dessous </h1>
 		<code>int {varName}[] = {table}</code>
+		<textarea on:change={() => {}} value={table}></textarea>
 
 	</div>
 </section>
