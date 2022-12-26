@@ -25,8 +25,11 @@ You also can edit  `pov-server/src/animations.h` if you want to add more default
 #### Developpement
 
 `src/conf/wifi-conf.h`contains variables related to wifi ssid and credentials
+
 `src/animations.h`contains "led animation variables" and some led animation functions
+
 `src/html.h`contains the html code for the webserver, stored in a variable ( in the future the file will be more dynamic,to permit the loading of dynamic custom animations)
+
 `src/main.cpp` the main code and declaration 
 
 **Webserver**
