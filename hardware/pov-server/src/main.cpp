@@ -3,19 +3,19 @@
 #include <WiFiClient.h>
 #include <WiFiAP.h>
 #include "html.h"
-
+#include "animations.h"
+#include "conf/wifi-conf.h"
 
 #define LED_BUILTIN 2   // Set the GPIO pin where you connected your test LED or comment this line out if your dev board has a built-in LED
 
-// Set these to your desired credentials.
-const char *ssid = "pov-1";
-const char *password = "autobot3000";
+
 
 WiFiServer server(80);
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
+  //----------------- WiFi Setup -----------------//
   Serial.begin(115200);
   Serial.println();
   Serial.println("Configuring access point...");
@@ -28,9 +28,40 @@ void setup() {
   server.begin();
 
   Serial.println("Server started");
+
+  //----------------- LED Setup -----------------//
+   pinMode(IR_pin,INPUT);
+         for( int i = 0; i<8 ;i++ ) // setting the ports of the leds to OUTPUT
+           {
+            pinMode(pins[i], OUTPUT);
+           }
+                
+         letterSpace =4;// defining the space between the letters (ms)         
+         delayTime =1;// defining the time dots appear (ms)
 }
 
 void loop() {
+
+  //----------------- LED Loop -----------------//
+ if(digitalRead(IR_pin)==LOW)
+  {
+     printLetter (P);
+     printLetter (O);
+     printLetter (V);
+     printLetter (_);
+     printLetter (_);
+     printLetter (D);
+     printLetter (I);
+     printLetter (S);
+     printLetter (P);
+     printLetter (L);
+     printLetter (A);
+     printLetter (Y);
+     printLetter (_);
+ 
+  }
+
+  //----------------- WiFi Loop -----------------//
    WiFiClient client = server.available();   // listen for incoming clients
 
   if (client) {                             // if you get a client,
