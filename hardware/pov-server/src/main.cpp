@@ -12,6 +12,10 @@
 
 WiFiServer server(80);
 
+// Declare a led on/off variable
+bool ledState = true;
+int animation = 1;
+
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
@@ -40,24 +44,13 @@ void setup() {
          delayTime =1;// defining the time dots appear (ms)
 }
 
+
 void loop() {
 
   //----------------- LED Loop -----------------//
- if(digitalRead(IR_pin)==LOW)
+ if(digitalRead(IR_pin)==LOW && ledState == true)
   {
-     printLetter (P);
-     printLetter (O);
-     printLetter (V);
-     printLetter (_);
-     printLetter (_);
-     printLetter (D);
-     printLetter (I);
-     printLetter (S);
-     printLetter (P);
-     printLetter (L);
-     printLetter (A);
-     printLetter (Y);
-     printLetter (_);
+    setAnimation(animation);
  
   }
 
@@ -70,7 +63,7 @@ void loop() {
     while (client.connected()) {            // loop while the client's connected
       if (client.available()) {             // if there's bytes to read from the client,
         char c = client.read();             // read a byte, then
-        Serial.write(c);                    // print it out the serial monitor
+        //Serial.write(c);                    // print it out the serial monitor
         if (c == '\n') {                    // if the byte is a newline character
 
           // if the current line is blank, you got two newline characters in a row.
@@ -99,13 +92,30 @@ void loop() {
           currentLine += c;      // add it to the end of the currentLine
         }
 
-        // Check to see if the client request was "GET /H" or "GET /L":
+        // Turn on or off the all the LEDs
         if (currentLine.endsWith("GET /api/display/on")) {
-          digitalWrite(LED_BUILTIN, HIGH);               // GET /H turns the LED on
+          ledState = true;
         }
         if (currentLine.endsWith("GET /api/display/off")) {
-          digitalWrite(LED_BUILTIN, LOW);                // GET /L turns the LED off
+          ledState = false;
         }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/animate/1")) {
+          Serial.println("GET /api/display/animate/1");
+          animation = 1;
+        }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/animate/2")) {
+          Serial1.println("GET /api/display/animate/2");
+          animation = 2;
+        }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/animate/3")) {
+          Serial1.println("GET /api/display/animate/3");
+          animation = 3;
+        }
+
+        
       }
     }
     // close the connection:

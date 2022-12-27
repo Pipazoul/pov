@@ -62,11 +62,10 @@ const char *html = R""""(
       <!--Table grid 8*5-->
     </div>
     <div class="anim-container">
-      <ul>
-        <li> Animation 1</li>
-        <li> Animation 2</li>
-        <li> Animation 3</li>
-      </ul>
+      <button onclick="setAnimation(1)">Animation 1</button>
+      <button onclick="setAnimation(2)">Animation 2</button>
+      <button onclick="setAnimation(3)">Animation 3</button>
+
     </div>
     <div class="strobe-param">
       <div class="checkbox-btn">
@@ -103,8 +102,24 @@ const char *html = R""""(
         .catch((error) => {
           console.error('Error:', error);
         });
-
     }
+    // Fetch rout GET api/display/animation/ + animation number
+    function setAnimation(number) {
+      fetch(`/api/display/animation/${number}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+
 
     //-----------------Animation Buttons-----------------//
     const li = document.querySelectorAll('li');
@@ -129,7 +144,12 @@ const char *html = R""""(
       }
     });
 
-    
+    //-----------------Animation Button-----------------//
+
+
+
+
+
 
 
   </script>
