@@ -36,8 +36,8 @@ void setup() {
             pinMode(pins[i], OUTPUT);
            }
                 
-         letterSpace =4;// defining the space between the letters (ms)         
-         delayTime =1;// defining the time dots appear (ms)
+         //letterSpace =4;// defining the space between the letters (ms)         
+         //delayTime =1;// defining the time dots appear (ms)
 }
 
 void loop() {
@@ -45,6 +45,8 @@ void loop() {
   //----------------- LED Loop -----------------//
  if(digitalRead(IR_pin)==LOW)
   {
+    getDelayTime();
+    
      printLetter (P);
      printLetter (O);
      printLetter (V);

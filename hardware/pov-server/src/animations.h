@@ -36,15 +36,62 @@ int X[] = {1,1,0,0,0,0,1,1, 0,0,1,0,0,1,0,0, 0,0,0,1,1,0,0,0, 0,0,1,0,0,1,0,0, 1
 int Y[] = {1,1,0,0,0,0,0,0, 0,0,1,0,0,0,0,0, 0,0,0,1,1,1,1,1, 0,0,1,0,0,0,0,0, 1,1,0,0,0,0,0,0};
 int Z[] = {1,0,0,0,0,1,1,1, 1,0,0,0,1,0,0,1, 1,0,0,1,0,0,0,1, 1,0,1,0,0,0,0,1, 1,1,0,0,0,0,0,1};
 
+int emptyline[] = {0,0,0,0,0,0,0,0};
+
 int* alpha[]= {A,B,C,D,E,F,G,H,I,J,K,L,M,N};//,T,U,V,W,X,Y,Z};
-int letterSpace;
-int delayTime;
+//int letterSpace;
+//int delayTime;
 
 int pins[] = {2, 0, 4, 16, 17, 5, 18, 23};
 
 #define IR_pin 33
+#define NUM_LEDS 8
+
+//----------------- Get Delay Time -----------------//
+int numRadius = 50;
+int latency = 20;
+long boardTime;
+long boardTime_memo;
+long period;
+int delayTime;
+/* micros() : Returns the number of microseconds since the Arduino board
+began running the current program. Data type: unsigned long. */
+void getDelayTime() {
+  boardTime = micros(); // (microseconds)
+  period = (boardTime - boardTime_memo); // period of one lap (us)
+  boardTime_memo = boardTime; // stock data
+  delayTime = round((period/numRadius) - latency); // time to wait before to print one line of leds (us)
+}
+//--------------------------------------------------//
 
 
+//----------------- Print Radius -------------------//
+void printRadius(int line[]) {
+  for (int i=0; i<NUM_LEDS; i++) {
+    digitalWrite(pins[i], line[i]);
+    delay(delayTime);
+  }
+  delayMicroseconds(delayTime);
+}
+//--------------------------------------------------//
+
+
+//----------------- Print Letter -------------------//
+void printLetter(int letter[]) {
+  int line[] = {};
+  for (int numline=0; numline<=(NUM_LEDS*4); numline+=NUM_LEDS) {
+    for(int led=0; led<NUM_LEDS; led++) {
+      line[led] = {letter[led+numline]};
+    }
+    printRadius(line);
+  }
+  printRadius(emptyline); // letter space
+}
+//--------------------------------------------------//
+
+
+/*
+//----------------- Print Letter -------------------//
 void printLetter(int letter[])
 {
         int y;
@@ -81,3 +128,4 @@ void printLetter(int letter[])
         }
         delay(letterSpace);
 }
+*/
