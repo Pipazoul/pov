@@ -108,21 +108,6 @@ void setAnimation(int animationNb)
                 printLetter(animation_3);
                 Serial1.println("animation 4");
 
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-                printLetter(animation_4);
-
         }
         if (animationNb == 2)
         {
