@@ -16,8 +16,23 @@ WiFiServer server(80);
 bool ledState = true;
 int animation = 1;
 
+
+//----------------- IR Sync -----------------------//
+void IRAM_ATTR buttonpressed() {
+  getDelayTime();
+  //Serial.println("GOT DELAY");
+}
+//-------------------------------------------------//
+
+
+
+
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
+
+  //----------------- IR Sync Setup -----------------//
+  pinMode(IR_pin, INPUT_PULLDOWN);
+  attachInterrupt(IR_pin, buttonpressed, RISING);
 
   //----------------- WiFi Setup -----------------//
   Serial.begin(115200);
@@ -40,19 +55,22 @@ void setup() {
             pinMode(pins[i], OUTPUT);
            }
                 
-         letterSpace =4;// defining the space between the letters (ms)         
-         delayTime =1;// defining the time dots appear (ms)
+         //letterSpace =4;// defining the space between the letters (ms)         
+         //delayTime =1;// defining the time dots appear (ms)
 }
 
 
 void loop() {
 
   //----------------- LED Loop -----------------//
+  setAnimation(animation);
+ /*
  if(digitalRead(IR_pin)==LOW && ledState == true)
   {
+    getDelayTime();
     setAnimation(animation);
- 
   }
+  */
 
   //----------------- WiFi Loop -----------------//
    WiFiClient client = server.available();   // listen for incoming clients
