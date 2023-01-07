@@ -1,7 +1,14 @@
 # pov
 Fork from https://create.arduino.cc/projecthub/theSTEMpedia/persistence-of-vision-pov-display-using-arduino-583d5f
 With a few upgrades
--
+
+
+
+## Usage
+
+Connect to ssid `pov-server` with password defined in `pov-server/src/conf/wifi-conf.h`
+
+Open a browser and go to `192.168.4.1`
 
 ## Hardware
 

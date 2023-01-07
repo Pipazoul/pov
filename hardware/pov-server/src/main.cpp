@@ -6,11 +6,10 @@
 #include "animations.h"
 #include "conf/wifi-conf.h"
 
-#define LED_BUILTIN 2   // Set the GPIO pin where you connected your test LED or comment this line out if your dev board has a built-in LED
-
-
 
 WiFiServer server(80);
+
+#define IR_pin 33
 
 // Declare a led on/off variable
 bool ledState = true;
@@ -18,7 +17,7 @@ int animation = 1;
 
 
 //----------------- IR Sync -----------------------//
-void IRAM_ATTR buttonpressed() {
+void IRAM_ATTR irTriggered() {
   getDelayTime();
   //Serial.println("GOT DELAY");
 }
@@ -28,11 +27,10 @@ void IRAM_ATTR buttonpressed() {
 
 
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
 
   //----------------- IR Sync Setup -----------------//
   pinMode(IR_pin, INPUT_PULLDOWN);
-  attachInterrupt(IR_pin, buttonpressed, RISING);
+  attachInterrupt(IR_pin, irTriggered, RISING);
 
   //----------------- WiFi Setup -----------------//
   Serial.begin(115200);
@@ -54,9 +52,6 @@ void setup() {
            {
             pinMode(pins[i], OUTPUT);
            }
-                
-         //letterSpace =4;// defining the space between the letters (ms)         
-         //delayTime =1;// defining the time dots appear (ms)
 }
 
 
@@ -64,13 +59,9 @@ void loop() {
 
   //----------------- LED Loop -----------------//
   setAnimation(animation);
- /*
- if(digitalRead(IR_pin)==LOW && ledState == true)
-  {
-    getDelayTime();
-    setAnimation(animation);
-  }
-  */
+  //Serial.println("Animation Done");
+  //Serial.println(animation);
+  
 
   //----------------- WiFi Loop -----------------//
    WiFiClient client = server.available();   // listen for incoming clients
@@ -113,22 +104,25 @@ void loop() {
         // Turn on or off the all the LEDs
         if (currentLine.endsWith("GET /api/display/on")) {
           ledState = true;
+          Serial.println("GET /api/display/on");
         }
         if (currentLine.endsWith("GET /api/display/off")) {
           ledState = false;
+          Serial.println("GET /api/display/off");
         }
         // Set animation api/display/animate/[id]
-        if (currentLine.endsWith("GET /api/display/animate/1")) {
+        if (currentLine.endsWith("GET /api/display/1")) {
           Serial.println("GET /api/display/animate/1");
           animation = 1;
+
         }
         // Set animation api/display/animate/[id]
-        if (currentLine.endsWith("GET /api/display/animate/2")) {
+        if (currentLine.endsWith("GET /api/display/2")) {
           Serial1.println("GET /api/display/animate/2");
           animation = 2;
         }
         // Set animation api/display/animate/[id]
-        if (currentLine.endsWith("GET /api/display/animate/3")) {
+        if (currentLine.endsWith("GET /api/display/3")) {
           Serial1.println("GET /api/display/animate/3");
           animation = 3;
         }
