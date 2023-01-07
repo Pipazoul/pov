@@ -54,28 +54,23 @@ const char *html = R""""(
     }
   </style>
 </head>
-
-<body>
+<!-- Disable refresh-->
+<body >
   <div class="container">
     <h1>Pov Manager</h1>
     <div class="table-container">
       <!--Table grid 8*5-->
     </div>
+    <p>Changer les visuels</p>
     <div class="anim-container">
-      <button onclick="setAnimation(1)">Animation 1</button>
-      <button onclick="setAnimation(2)">Animation 2</button>
-      <button onclick="setAnimation(3)">Animation 3</button>
+      <button class="anim-1">Animation 1</button>
+      <button class="anim-2">Animation 2</button>
+      <button class="anim-3">Animation 3</button>
 
-    </div>
-    <div class="strobe-param">
-      <div class="checkbox-btn">
-        <button>Strobe</button>
-      </div>
-      <!--Add a slider from 1 to 100-->
-      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
     </div>
     <div class="on-off-param">
       <div class="checkbox-btn">
+        <p>Allumer / Eteindre Lumières</p>
         <button>On</button>
       </div>
     </div>
@@ -103,9 +98,10 @@ const char *html = R""""(
           console.error('Error:', error);
         });
     }
-    // Fetch rout GET api/display/animation/ + animation number
+    // Fetch rout GET api/display/ + animation number
     function setAnimation(number) {
-      fetch(`/api/display/animation/${number}`, {
+      apiRoute = '/api/display/' + number;
+      fetch(apiRoute, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -118,19 +114,10 @@ const char *html = R""""(
         .catch((error) => {
           console.error('Error:', error);
         });
+      
     }
 
 
-    //-----------------Animation Buttons-----------------//
-    const li = document.querySelectorAll('li');
-    li.forEach((item) => {
-      item.addEventListener('click', () => {
-        li.forEach((item) => {
-          item.classList.remove('active');
-        });
-        item.classList.add('active');
-      });
-    });
 
     //-----------------On/Off Button-----------------//
     const onOffBtn = document.querySelector('.on-off-param button');
@@ -145,7 +132,24 @@ const char *html = R""""(
     });
 
     //-----------------Animation Button-----------------//
-
+    if (document.querySelector('.anim-1')) {
+      const anim1Btn = document.querySelector('.anim-1');
+      anim1Btn.addEventListener('click', () => {
+        setAnimation(1);
+      });
+    }
+    if (document.querySelector('.anim-2')) {
+      const anim2Btn = document.querySelector('.anim-2');
+      anim2Btn.addEventListener('click', () => {
+        setAnimation(2);
+      });
+    }
+    if (document.querySelector('.anim-3')) {
+      const anim3Btn = document.querySelector('.anim-3');
+      anim3Btn.addEventListener('click', () => {
+        setAnimation(3);
+      });
+    }
 
 
 
