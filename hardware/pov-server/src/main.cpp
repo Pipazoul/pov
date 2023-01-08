@@ -6,10 +6,9 @@
 #include "animations.h"
 #include "conf/wifi-conf.h"
 
-
 WiFiServer server(80);
 
-#define IR_pin 33
+#define IR_pin 33 // IR sensor pin
 
 // Declare a led on/off variable
 bool ledState = true;
@@ -58,10 +57,9 @@ void setup() {
 void loop() {
 
   //----------------- LED Loop -----------------//
-  setAnimation(animation);
-  //Serial.println("Animation Done");
-  //Serial.println(animation);
-  
+  if(ledState == true) { // if the "activate lights" button state is ON
+    setAnimation(animation); // play the animation
+  }
 
   //----------------- WiFi Loop -----------------//
    WiFiClient client = server.available();   // listen for incoming clients
@@ -108,6 +106,7 @@ void loop() {
         }
         if (currentLine.endsWith("GET /api/display/off")) {
           ledState = false;
+          turnLightsOff();
           Serial.println("GET /api/display/off");
         }
         // Set animation api/display/animate/[id]
