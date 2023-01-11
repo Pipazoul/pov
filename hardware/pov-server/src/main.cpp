@@ -13,7 +13,8 @@ WiFiServer server(80);
 // Declare a led on/off variable
 bool ledState = true;
 int animation = 1;
-
+bool liveMode = false;
+int liveAnimation[40];
 
 //----------------- IR Sync -----------------------//
 void IRAM_ATTR irTriggered() {
@@ -27,8 +28,8 @@ void IRAM_ATTR irTriggered() {
 void setup() {
 
   //----------------- IR Sync Setup -----------------//
-  pinMode(IR_pin, INPUT_PULLDOWN);
-  attachInterrupt(IR_pin, irTriggered, RISING);
+  //pinMode(IR_pin, INPUT_PULLDOWN);
+  //attachInterrupt(IR_pin, irTriggered, RISING);
 
   //----------------- WiFi Setup -----------------//
   Serial.begin(115200);
@@ -58,6 +59,9 @@ void loop() {
   //----------------- LED Loop -----------------//
   if(ledState == true) { // if the "activate lights" button state is ON
     setAnimation(animation); // play the animation
+  }
+  if(liveMode == true) { // if the "live mode" button state is ON
+    printAnim(liveAnimation); // play the animation
   }
 
   //----------------- WiFi Loop -----------------//
@@ -124,8 +128,34 @@ void loop() {
           Serial1.println("GET /api/display/animate/3");
           animation = 3;
         }
-
-        
+        // if current line contains /api/display/animation?animation=[numbers] get the numbers after the =
+        if (currentLine.indexOf("GET /api/display/animation?animation=") != -1) {
+          int index = currentLine.indexOf("GET /api/display/animation?animation=") + 37;
+          
+          // if length is 40
+          if (currentLine.length() == 125) {
+            // String of all the numbers after the =
+            String animationString = currentLine.substring(index);
+            // Convert to an array of numbers {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+            int animationArray[40];
+            // remove  , from the string
+            animationString.replace(",", "");
+            for (int i = 0; i < 40; i++) {
+              // convert each char to an int and add to the array
+              animationArray[i] = animationString.charAt(i) - '0';
+            }
+            Serial.println("Animation: ");
+            for (int i = 0; i < 40; i++) {
+              Serial.print(animationArray[i]);
+            }
+            liveMode = true;
+            // set liveAnimation to the animationArray
+            for (int i = 0; i < 40; i++) {
+              liveAnimation[i] = animationArray[i];
+            }
+            
+          }
+        }
       }
     }
     // close the connection:
