@@ -5,10 +5,10 @@ int animation_4[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 int emptyline[] = {0,0,0,0,0,0,0,0};
 
 
-int pins[] = {2, 0, 4, 16, 17, 5, 18, 23};
+
 
 #define NUM_LEDS 8 // amount of leds available
-
+int pins[] = {2, 0, 4, 16, 17, 5, 18, 23}; // led pins
 int animLines = 5; // amount of lines per animation
 
 

@@ -18,7 +18,6 @@ int animation = 1;
 //----------------- IR Sync -----------------------//
 void IRAM_ATTR irTriggered() {
   getDelayTime();
-  //Serial.println("GOT DELAY");
 }
 //-------------------------------------------------//
 
