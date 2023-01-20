@@ -40,7 +40,18 @@ onMount(() => {
 </svelte:head>
 
 <section>
-	<table>
+	<div class="ledStrip-Container">
+		<div class="ledstrip {rotate ? "rotate" : ""}">
+			{#each ledStrip as cell, i}
+				{#if cell == 1}
+					<div class="cell" style="background-color: black;"></div>
+				{:else}
+					<div class="cell" style="background-color: white;"></div>
+				{/if}
+			{/each}
+		</div>
+	</div>
+	<table class="ledMatrix">
 		{#each table as row, a}
 			<tr>
 				{#each row as cell, i}
@@ -48,28 +59,17 @@ onMount(() => {
 						<!--If cell is 1 change bg color to black -->
 						{#if cell == 1}
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<div on:click={() => updateTable(a,i, 0)} style="background-color: black; width: 50px; height: 50px;"></div>
+							<div on:click={() => updateTable(a,i, 0)} style="background-color: black;"></div>
 						{:else}
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<div  on:click={() => updateTable(a,i, 1)} style="background-color: white; width: 50px; height: 50px;"></div>
+							<div  on:click={() => updateTable(a,i, 1)} style="background-color: white;"></div>
 						{/if}
 					</td>
 				{/each}
 			</tr>
 		{/each}
 	</table>
-	<div class="ledstrip {rotate ? "rotate" : ""}">
-		{#each ledStrip as cell, i}
-			{#if cell == 1}
-				<div style="background-color: black; width: 50px; height: 50px;"></div>
-			{:else}
-				<div style="background-color: white; width: 50px; height: 50px;"></div>
-			{/if}
-		{/each}
-
-
-	</div>
-	<div>
+	<div class="settings">
 		<input type="checkbox" bind:checked={rotate} /> Rotation
 		<!--rotation speed-->
 		
@@ -84,10 +84,15 @@ onMount(() => {
 <style>
 	section {
 		display: flex;
+		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
+	}
+
+	.ledMatrix {
+		margin-top: 200px;
 	}
 
 	tr td {
@@ -95,14 +100,27 @@ onMount(() => {
 		padding: 0;
 		margin: 0;
 	}
+
+	tr td div {
+		width: 4vw;
+		height: 4vw;
+	}
+
 	.ledstrip {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
+		margin-top: 200px;
 
 	}
+
+	.ledstrip .cell {
+		width: 4vw;
+		height: 4vw;
+	}
+
 	/**Rotation animation*/
 	@keyframes rotation {
 		from {
@@ -114,6 +132,29 @@ onMount(() => {
 	}
 	.ledstrip.rotate {
 		animation: rotation 0.2s linear infinite;
+	}
+
+	.settings {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: left;
+		flex: 0.4;
+		padding: 15px;
+		width: 90%;
+	}
+
+	/*Below 1407px */
+	@media (max-width: 1407px) {
+		tr td div {
+		width: 8vw;
+		height: 8vw;
+		}
+
+		.ledstrip .cell {
+			width: 10vw;
+			height: 10vw;
+		}
 	}
 
 
