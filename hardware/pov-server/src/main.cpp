@@ -98,9 +98,9 @@ void loop() {
     if(liveMode == false ){
       setAnimation(animation); // play the animation
     }
-  }
-  if(liveMode == true) { // if the "live mode" button state is ON
-    printAnim(liveAnimation); // play the animation
+    if(liveMode == true) { // if the "live mode" button state is ON
+      printAnim(liveAnimation); // play the animation
+    }
   }
 
   //----------------- WiFi Loop -----------------//

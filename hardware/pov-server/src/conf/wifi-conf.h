@@ -1,3 +1,3 @@
 // Set these to your desired credentials.
-const char *ssid = "pov-2";
-const char *password = "autobot3000";
+const char *ssid = "ventiled-0";
+const char *password = "ventiled";
