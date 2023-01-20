@@ -41,6 +41,7 @@ onMount(() => {
 
 <section>
 	<div class="ledStrip-Container">
+		<h1>Prévisualisation</h1>
 		<div class="ledstrip {rotate ? "rotate" : ""}">
 			{#each ledStrip as cell, i}
 				{#if cell == 1}
@@ -51,33 +52,39 @@ onMount(() => {
 			{/each}
 		</div>
 	</div>
-	<table class="ledMatrix">
-		{#each table as row, a}
-			<tr>
-				{#each row as cell, i}
-					<td>
-						<!--If cell is 1 change bg color to black -->
-						{#if cell == 1}
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<div on:click={() => updateTable(a,i, 0)} style="background-color: black;"></div>
-						{:else}
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<div  on:click={() => updateTable(a,i, 1)} style="background-color: white;"></div>
-						{/if}
-					</td>
-				{/each}
-			</tr>
-		{/each}
-	</table>
+	<div class="ledMatrix-Container">
+		<h1>Créateur d'animation</h1>
+		<table class="ledMatrix">
+			{#each table as row, a}
+				<tr>
+					{#each row as cell, i}
+						<td>
+							<!--If cell is 1 change bg color to black -->
+							{#if cell == 1}
+								<!-- svelte-ignore a11y-click-events-have-key-events -->
+								<div on:click={() => updateTable(a,i, 0)} style="background-color: black;"></div>
+							{:else}
+								<!-- svelte-ignore a11y-click-events-have-key-events -->
+								<div  on:click={() => updateTable(a,i, 1)} style="background-color: white;"></div>
+							{/if}
+						</td>
+					{/each}
+				</tr>
+			{/each}
+		</table>
+	</div>
 	<div class="settings">
-		<input type="checkbox" bind:checked={rotate} /> Rotation
-		<!--rotation speed-->
+		<div>
+			<input type="checkbox" bind:checked={rotate} /> Activer Rotation
+			<!--rotation speed-->
+		</div>
+
 		
 		<h1>Nom de votre forme</h1>
 		<input type="text" bind:value={varName} />
 		<h1>Copier le code ci dessous </h1>
 		<code>int {varName}[] = {table}</code>
-		<textarea on:change={() => {}} value={table}></textarea>
+
 	</div>
 </section>
 
@@ -91,8 +98,8 @@ onMount(() => {
 		flex: 0.6;
 	}
 
-	.ledMatrix {
-		margin-top: 200px;
+	.ledMatrix-Container {
+		height: 700px;
 	}
 
 	tr td {
@@ -104,6 +111,11 @@ onMount(() => {
 	tr td div {
 		width: 4vw;
 		height: 4vw;
+	}
+
+	.ledStrip-Container {
+		padding: 15px;
+		height: 700px;
 	}
 
 	.ledstrip {
@@ -119,6 +131,20 @@ onMount(() => {
 	.ledstrip .cell {
 		width: 4vw;
 		height: 4vw;
+	}
+
+	code {
+		background-color: #f1f1f1;
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		display: block;
+		font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+		font-size: 14px;
+
+		padding: 12px 10px;
+		white-space: pre;
+		white-space: pre-wrap;
+		word-wrap: break-word;
 	}
 
 	/**Rotation animation*/
@@ -146,9 +172,20 @@ onMount(() => {
 
 	/*Below 1407px */
 	@media (max-width: 1407px) {
+		.ledMatrix-Container {
+			height: inherit;
+		}
+		.ledMatrix {
+			margin-top: 0;
+		}
 		tr td div {
-		width: 8vw;
-		height: 8vw;
+		width:11vw;
+		height: 11vw;
+		}
+
+		.ledStrip-Container {
+			height: inherit;
+			height: 500px;
 		}
 
 		.ledstrip .cell {
