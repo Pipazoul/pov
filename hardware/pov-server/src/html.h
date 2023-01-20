@@ -124,8 +124,6 @@ const char *html = R""""(
       
     }
 
-
-
     //-----------------On/Off Button-----------------//
     const onOffBtn = document.querySelector('.on-off-param button');
     onOffBtn.addEventListener('click', () => {
@@ -165,7 +163,6 @@ const char *html = R""""(
     cells.forEach((cell) => {
       cell.addEventListener('click', () => {
         cell.classList.toggle('active');
-        sendAnimationCells();
       });
     });
 
@@ -180,7 +177,6 @@ const char *html = R""""(
           cellsArray.push(0);
         }
       });
-      console.log(cellsArray);
       // Fetch route GET /api/display/animation?animation= + cellsArray
       fetch(`/api/display/animation?animation=${cellsArray}`, {
         method: 'GET',
@@ -197,6 +193,18 @@ const char *html = R""""(
         });
 
     }
+
+    //----------------- Click watcher-----------------//
+    // Wait 0.5sec after click to send the animation if the user click on multiple cells
+    let clickTimer;
+    cells.forEach((cell) => {
+      cell.addEventListener('click', () => {
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+          sendAnimationCells();
+        }, 800);
+      });
+    });
 
 
 
