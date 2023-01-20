@@ -48,6 +48,8 @@ void setup() {
 
   Serial.println("Server started");
 
+  ArduinoOTA.setPort(40000);
+
     ArduinoOTA
     .onStart([]() {
       String type;
