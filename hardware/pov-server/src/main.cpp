@@ -1,7 +1,10 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiClient.h>
+#include <WiFiUdp.h>
 #include <WiFiAP.h>
+#include <ArduinoOTA.h>
+#include <ESPmDNS.h>
 #include "html.h"
 #include "animations.h"
 #include "conf/wifi-conf.h"
@@ -45,6 +48,38 @@ void setup() {
 
   Serial.println("Server started");
 
+    ArduinoOTA
+    .onStart([]() {
+      String type;
+      if (ArduinoOTA.getCommand() == U_FLASH)
+        type = "sketch";
+      else // U_SPIFFS
+        type = "filesystem";
+
+      // NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
+      Serial.println("Start updating " + type);
+    })
+    .onEnd([]() {
+      Serial.println("\nEnd");
+    })
+    .onProgress([](unsigned int progress, unsigned int total) {
+      Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+    })
+    .onError([](ota_error_t error) {
+      Serial.printf("Error[%u]: ", error);
+      if (error == OTA_AUTH_ERROR) Serial.println("Auth Failed");
+      else if (error == OTA_BEGIN_ERROR) Serial.println("Begin Failed");
+      else if (error == OTA_CONNECT_ERROR) Serial.println("Connect Failed");
+      else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
+      else if (error == OTA_END_ERROR) Serial.println("End Failed");
+    });
+
+  ArduinoOTA.begin();
+
+  Serial.println("Ready");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
   //----------------- LED Setup -----------------//
    pinMode(IR_pin,INPUT);
          for( int i = 0; i<8 ;i++ ) // setting the ports of the leds to OUTPUT
@@ -56,9 +91,13 @@ void setup() {
 
 void loop() {
 
+  ArduinoOTA.handle();
+
   //----------------- LED Loop -----------------//
-  if(ledState == true) { // if the "activate lights" button state is ON
-    setAnimation(animation); // play the animation
+  if(ledState == true ) { // if the "activate lights" button state is ON
+    if(liveMode == false ){
+      setAnimation(animation); // play the animation
+    }
   }
   if(liveMode == true) { // if the "live mode" button state is ON
     printAnim(liveAnimation); // play the animation
@@ -115,17 +154,20 @@ void loop() {
         // Set animation api/display/animate/[id]
         if (currentLine.endsWith("GET /api/display/1")) {
           Serial.println("GET /api/display/animate/1");
+          liveMode = false;
           animation = 1;
 
         }
         // Set animation api/display/animate/[id]
         if (currentLine.endsWith("GET /api/display/2")) {
           Serial1.println("GET /api/display/animate/2");
+          liveMode = false;
           animation = 2;
         }
         // Set animation api/display/animate/[id]
         if (currentLine.endsWith("GET /api/display/3")) {
           Serial1.println("GET /api/display/animate/3");
+          liveMode = false;
           animation = 3;
         }
         // if current line contains /api/display/animation?animation=[numbers] get the numbers after the =
