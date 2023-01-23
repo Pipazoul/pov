@@ -70,7 +70,7 @@ const char *html = R""""(
     </div>
     <div class="speed">
       <p>Vitesse de l'animation</p>
-      <input type="range" min="100" max="10000" value="1000" step="500" class="slider">
+      <input type="range" min="100" max="100000" value="1000" step="500" class="slider">
       <p class="speed-value"></p>
     </div>
     <p>Changer les visuels</p>
