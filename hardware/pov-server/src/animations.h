@@ -28,7 +28,7 @@ long boardTime_memo = 1;
 long period = 1;
 
 // Time to wait before to print one line of leds
-int delayTime = 100000;
+int delayTime = 500;
 
 /* micros() : Returns the number of microseconds since the Arduino board
 began running the current program. Data type: unsigned long. */

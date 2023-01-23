@@ -172,6 +172,17 @@ void loop() {
           liveMode = false;
           animation = 3;
         }
+        if (currentLine.endsWith("GET /api/animation?speed=")) {
+          // get the numbers after the =
+          int index = currentLine.indexOf("GET /api/animation?speed=") + 25;
+          // String of all the numbers after the =
+          String speedString = currentLine.substring(index);
+          // Convert to an int
+          int speed = speedString.toInt();
+          // Set the speed
+          delayTime = speed;
+
+        }
         // if current line contains /api/display/animation?animation=[numbers] get the numbers after the =
         if (currentLine.indexOf("GET /api/display/animation?animation=") != -1) {
           int index = currentLine.indexOf("GET /api/display/animation?animation=") + 37;

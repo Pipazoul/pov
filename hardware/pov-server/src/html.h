@@ -68,6 +68,11 @@ const char *html = R""""(
       
       </table>
     </div>
+    <div class="speed">
+      <p>Vitesse de l'animation</p>
+      <input type="range" min="100" max="10000" value="1000" step="500" class="slider">
+      <p class="speed-value"></p>
+    </div>
     <p>Changer les visuels</p>
     <div class="anim-container">
       <button class="anim-1">Animation 1</button>
@@ -206,7 +211,29 @@ const char *html = R""""(
       });
     });
 
-
+    //-----------------Speed Slider-----------------//
+    const speedSlider = document.querySelector('.slider');
+    const speedValue = document.querySelector('.speed-value');
+    speedValue.innerHTML = speedSlider.value;
+    speedSlider.oninput = function () {
+      speedValue.innerHTML = this.value;
+    };
+    speedSlider.addEventListener('mouseup', () => {
+      // Fetch route GET /api/display/speed?speed= + speedSlider.value
+      fetch(`/api/animation?speed=${speedSlider.value}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    });
 
 
 
