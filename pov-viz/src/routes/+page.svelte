@@ -1,5 +1,5 @@
 <script>
-import { onMount } from "svelte";
+import { onMount  } from "svelte";
 
 let varName = "NUMBER_9"
 let table=[
@@ -22,6 +22,8 @@ function updateTable(a,i, val){
 }
 
 let a = 0;
+
+let interval = 100;
 
 function loop() {
   ledStrip = table[a];
@@ -78,8 +80,6 @@ onMount(() => {
 			<input type="checkbox" bind:checked={rotate} /> Activer Rotation
 			<!--rotation speed-->
 		</div>
-
-		
 		<h1>Nom de votre forme</h1>
 		<input type="text" bind:value={varName} />
 		<h1>Copier le code ci dessous </h1>
@@ -125,12 +125,14 @@ onMount(() => {
 		align-items: center;
 		flex: 0.6;
 		margin-top: 200px;
+		transform-origin: bottom left;
+		padding-left: 50%;
 
 	}
 
 	.ledstrip .cell {
-		width: 4vw;
-		height: 4vw;
+		width: 2vw;
+		height: 2vw;
 	}
 
 	code {
@@ -189,8 +191,8 @@ onMount(() => {
 		}
 
 		.ledstrip .cell {
-			width: 10vw;
-			height: 10vw;
+			width: 2.3vw;
+			height: 2.3vw;
 		}
 	}
 
