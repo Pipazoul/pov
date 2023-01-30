@@ -19,6 +19,7 @@ int animation = 1;
 bool liveMode = false;
 int liveAnimation[40];
 
+
 //----------------- IR Sync -----------------------//
 void IRAM_ATTR irTriggered() {
   getDelayTime();
@@ -171,6 +172,37 @@ void loop() {
           Serial1.println("GET /api/display/animate/3");
           liveMode = false;
           animation = 3;
+        }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/4")) {
+          Serial1.println("GET /api/display/animate/4");
+          liveMode = false;
+          animation = 3;
+        }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/5")) {
+          Serial1.println("GET /api/display/animate/5");
+          liveMode = false;
+          animation = 3;
+        }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/6")) {
+          Serial1.println("GET /api/display/animate/6");
+          liveMode = false;
+          animation = 3;
+        }
+        // Change the L.E.D blink speed
+        if (currentLine.indexOf("GET /api/animation?speed=") != -1) {
+          Serial1.println("Led blink Speed set to:");
+          // get the numbers after the =
+          int index = currentLine.indexOf("GET /api/animation?speed=") + 25;
+          // String of all the numbers after the =
+          String speedString = currentLine.substring(index);
+          // Convert to an int
+          int speed = speedString.toInt();
+          Serial1.println(speed);
+          // Set the delayTime
+          delayTime = speed;
         }
         // if current line contains /api/display/animation?animation=[numbers] get the numbers after the =
         if (currentLine.indexOf("GET /api/display/animation?animation=") != -1) {
