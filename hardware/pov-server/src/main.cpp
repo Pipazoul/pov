@@ -204,20 +204,6 @@ void loop() {
           // Set the delayTime
           delayTime = speed;
         }
-        // Change the animation loop duration
-        if (currentLine.indexOf("GET /api/animationDelay?speed=") != -1) {
-          Serial1.println("Animation loop Speed set to:");
-          // get the numbers after the =
-          int index = currentLine.indexOf("GET /api/animationDelay?speed=") + 25;
-          // String of all the numbers after the =
-          String speedString = currentLine.substring(index);
-          // Convert to an int
-          int speed = speedString.toInt();
-          Serial1.println(speed);
-          // Set the delayTime
-          delayTime = speed;
-        }
-
         // if current line contains /api/display/animation?animation=[numbers] get the numbers after the =
         if (currentLine.indexOf("GET /api/display/animation?animation=") != -1) {
           int index = currentLine.indexOf("GET /api/display/animation?animation=") + 37;
