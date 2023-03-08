@@ -1,5 +1,5 @@
 // Speed: 600
-int animation_1[] = {
+int marche_turque_1[] = {
     0,0,0,0,1,0,0,0,
     0,0,0,1,0,0,0,0,
     0,0,1,0,0,0,0,0,
@@ -8,7 +8,7 @@ int animation_1[] = {
 };
 
 // Speed: 600
-int animation_2[] = {
+int marche_turque_2[] = {
     0,1,0,0,0,0,1,0,
     1,0,0,0,0,0,0,1,
     0,1,0,1,1,0,1,0,
@@ -17,7 +17,7 @@ int animation_2[] = {
 };
 
 // Speed: 600
-int animation_3[] = {
+int marche_turque_3[] = {
     1,0,0,0,0,0,0,1,
     0,1,0,0,0,0,1,0,
     0,0,1,0,0,1,0,0,
@@ -26,7 +26,7 @@ int animation_3[] = {
 };
 
 // Speed: 2600
-int animation_4[] = {
+int marche_turque_4[] = {
     0,0,0,0,0,0,0,0,
     1,0,1,0,0,1,0,1,
     0,1,0,1,1,0,1,0,
@@ -35,7 +35,7 @@ int animation_4[] = {
 };
 
 // Speed: 3600
-int animation_5[] = {
+int marche_turque_5[] = {
     0,1,0,0,0,0,0,1,
     0,0,0,0,0,0,0,0,
     0,0,0,1,0,0,1,0,
@@ -44,7 +44,7 @@ int animation_5[] = {
 };
 
 // Speed: 600
-int animation_6[] = {
+int marche_turque_6[] = {
     0,0,1,0,0,1,0,0,
     0,0,0,1,1,0,0,0,
     0,0,0,1,1,0,0,0,

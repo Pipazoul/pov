@@ -1,5 +1,5 @@
 // Speed: 100
-int animation_1[] = {
+int chachacha_1[] = {
     1,1,0,0,1,1,0,0,
     0,0,1,1,0,0,1,1,
     1,1,0,0,1,1,0,0,
@@ -8,7 +8,7 @@ int animation_1[] = {
 };
 
 // Speed: 100
-int animation_2[] = {
+int chachacha_2[] = {
     0,0,0,0,0,0,0,0,
     0,1,0,1,0,1,0,0,
     0,0,1,0,1,0,0,0,
@@ -17,7 +17,7 @@ int animation_2[] = {
 };
 
 // Speed: 600
-int animation_3[] = {
+int chachacha_3[] = {
     1,0,0,0,0,0,1,1,
     1,0,1,1,1,0,1,0,
     1,0,1,0,1,0,1,0,
@@ -26,7 +26,7 @@ int animation_3[] = {
 };
 
 // Speed: 100
-int animation_3[] = {
+int chachacha_4[] = {
     1,1,0,0,1,1,0,0,
     0,0,1,1,0,0,1,1,
     1,1,0,0,1,1,0,0,
@@ -35,7 +35,7 @@ int animation_3[] = {
 };
 
 // Speed: 600
-int animation_5[] = {
+int chachacha_5[] = {
     0,1,0,1,0,0,0,0,
     1,0,1,0,0,0,0,0,
     0,1,0,1,0,0,0,0,

@@ -191,6 +191,18 @@ void loop() {
           liveMode = false;
           animation = 3;
         }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/7")) {
+          Serial1.println("GET /api/display/animate/7");
+          liveMode = false;
+          animation = 3;
+        }
+        // Set animation api/display/animate/[id]
+        if (currentLine.endsWith("GET /api/display/8")) {
+          Serial1.println("GET /api/display/animate/8");
+          liveMode = false;
+          animation = 3;
+        }
         // Change the L.E.D blink speed
         if (currentLine.indexOf("GET /api/animation?speed=") != -1) {
           Serial1.println("Led blink Speed set to:");
@@ -230,6 +242,22 @@ void loop() {
               liveAnimation[i] = animationArray[i];
             }
             
+          }
+        }
+        // if current line contains /api/display/group?group=[numbers] get the numbers after the =
+        if (currentLine.indexOf("GET /api/display/group?group=") != -1) {
+          int index = currentLine.indexOf("GET /api/display/group?group=") + 29;
+          // if length is 40
+          if (currentLine.length() == 117) {
+            // String of all the numbers after the =
+            String groupString = currentLine.substring(index);
+            // Convert string to an int
+            int group = groupString.toInt();
+
+            Serial.println("Group: ");
+            Serial.println(group);
+            //set animNb to the group
+            animNb = group;
           }
         }
       }

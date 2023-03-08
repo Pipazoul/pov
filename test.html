@@ -71,6 +71,21 @@
       <input type="range" min="100" max="50000" value="1000" step="500" class="slider">
       <p class="speed-value"></p>
     </div>
+    <div class="group-selector">
+      <!-- Select box with defaut value 0 1c1 = 1  -->
+      <p>Choisir un groupe</p>
+      <select name="group" id="group" onchange="selectGroup()">
+        <option value="0">Defaut</option>
+        <option value="1">1c1</option>
+        <option value="2">bach</option>
+        <option value="3">chachacha</option>
+        <option value="4">kalinka</option>
+        <option value="5">marche turque</option>
+        <option value="6">marin</option>
+        <option value="7">pascal</option>
+        <option value="8">ragtime</option>
+      </select>
+    </div>
     <p>Changer les animations</p>
     <div class="anim-container">
       <button class="anim-1">Animation 1</button>
@@ -79,6 +94,8 @@
       <button class="anim-4">Animation 4</button>
       <button class="anim-5">Animation 5</button>
       <button class="anim-6">Animation 6</button>
+      <button class="anim-7">Animation 7</button>
+      <button class="anim-8">Animation 8</button>
     </div>
     <div class="on-off-param">
       <div class="checkbox-btn">
@@ -178,6 +195,18 @@
         setAnimation(6);
       });
     }
+    if (document.querySelector('.anim-7')) {
+      const anim7Btn = document.querySelector('.anim-7');
+      anim7Btn.addEventListener('click', () => {
+        setAnimation(7);
+      });
+    }
+    if (document.querySelector('.anim-8')) {
+      const anim8Btn = document.querySelector('.anim-8');
+      anim8Btn.addEventListener('click', () => {
+        setAnimation(8);
+      });
+    }
 
     //-----------------Table manager-----------------//
 
@@ -252,6 +281,27 @@
           console.error('Error:', error);
         });
     });
+
+    //-----------------Group value selector-----------------//
+    // on select change selectGroup
+    function selectGroup() {
+      const group = document.querySelector('#group').value;
+      // Fetch route GET /api/display/group?group= + group
+      fetch(`/api/display/group?group=${group}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+
   </script>
   <style>
     body {
