@@ -126,7 +126,7 @@ void setAnimation(int animationNb) {
 // Depending on animName import the correct animation.h file
   switch(animNb)
   {
-  case 0:
+  case 1:
     // 1c1.h animations memcpy
     memcpy(animation_1, c1_1, sizeof(animation_1));
     memcpy(animation_2, c1_2, sizeof(animation_2));
@@ -134,14 +134,14 @@ void setAnimation(int animationNb) {
     memcpy(animation_4, c1_4, sizeof(animation_4));
     memcpy(animation_5, c1_5, sizeof(animation_5));
      break; // Add this line
-  case 1:
+  case 2:
     // bach
     memcpy(animation_1, bach_1, sizeof(animation_1));
     memcpy(animation_2, bach_2, sizeof(animation_2));
     memcpy(animation_3, bach_3, sizeof(animation_3));
     memcpy(animation_4, bach_4, sizeof(animation_4));
      break; // Add this line
-  case 2:
+  case 3:
     //chachacha
     memcpy(animation_1, chachacha_1, sizeof(animation_1));
     memcpy(animation_2, chachacha_2, sizeof(animation_2));
@@ -149,14 +149,14 @@ void setAnimation(int animationNb) {
     memcpy(animation_4, chachacha_4, sizeof(animation_4));
     memcpy(animation_5, chachacha_5, sizeof(animation_5));
      break; // Add this line
-  case 3:
+  case 4:
     // kalinka
     memcpy(animation_1, kalinka_1, sizeof(animation_1));
     memcpy(animation_2, kalinka_2, sizeof(animation_2));
     memcpy(animation_3, kalinka_3, sizeof(animation_3));
     memcpy(animation_4, kalinka_4, sizeof(animation_4));
      break; // Add this line
-  case 4:
+  case 5:
     // marche_turque
     memcpy(animation_1, marche_turque_1, sizeof(animation_1));
     memcpy(animation_2, marche_turque_2, sizeof(animation_2));
@@ -165,7 +165,7 @@ void setAnimation(int animationNb) {
     memcpy(animation_5, marche_turque_5, sizeof(animation_5));
     memcpy(animation_6, marche_turque_6, sizeof(animation_6));
      break; // Add this line
-  case 5:
+  case 6:
     // marin
     memcpy(animation_1, marin_1, sizeof(animation_1));
     memcpy(animation_2, marin_2, sizeof(animation_2));
@@ -176,7 +176,7 @@ void setAnimation(int animationNb) {
     memcpy(animation_7, marin_7, sizeof(animation_7));
     memcpy(animation_8, marin_8, sizeof(animation_8));
      break; // Add this line
-  case 6:
+  case 7:
     // pascal
     memcpy(animation_1, pascal_1, sizeof(animation_1));
     memcpy(animation_2, pascal_2, sizeof(animation_2));
@@ -185,7 +185,7 @@ void setAnimation(int animationNb) {
     memcpy(animation_5, pascal_5, sizeof(animation_5));
     memcpy(animation_6, pascal_6, sizeof(animation_6));
      break; // Add this line
-  case 7:
+  case 8:
     // ragtime
     memcpy(animation_1, ragtime_1, sizeof(animation_1));
     memcpy(animation_2, ragtime_2, sizeof(animation_2));
