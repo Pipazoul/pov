@@ -133,12 +133,14 @@ void setAnimation(int animationNb) {
     memcpy(animation_3, c1_3, sizeof(animation_3));
     memcpy(animation_4, c1_4, sizeof(animation_4));
     memcpy(animation_5, c1_5, sizeof(animation_5));
+     break; // Add this line
   case 1:
     // bach
     memcpy(animation_1, bach_1, sizeof(animation_1));
     memcpy(animation_2, bach_2, sizeof(animation_2));
     memcpy(animation_3, bach_3, sizeof(animation_3));
     memcpy(animation_4, bach_4, sizeof(animation_4));
+     break; // Add this line
   case 2:
     //chachacha
     memcpy(animation_1, chachacha_1, sizeof(animation_1));
@@ -146,12 +148,14 @@ void setAnimation(int animationNb) {
     memcpy(animation_3, chachacha_3, sizeof(animation_3));
     memcpy(animation_4, chachacha_4, sizeof(animation_4));
     memcpy(animation_5, chachacha_5, sizeof(animation_5));
+     break; // Add this line
   case 3:
     // kalinka
     memcpy(animation_1, kalinka_1, sizeof(animation_1));
     memcpy(animation_2, kalinka_2, sizeof(animation_2));
     memcpy(animation_3, kalinka_3, sizeof(animation_3));
     memcpy(animation_4, kalinka_4, sizeof(animation_4));
+     break; // Add this line
   case 4:
     // marche_turque
     memcpy(animation_1, marche_turque_1, sizeof(animation_1));
@@ -160,6 +164,7 @@ void setAnimation(int animationNb) {
     memcpy(animation_4, marche_turque_4, sizeof(animation_4));
     memcpy(animation_5, marche_turque_5, sizeof(animation_5));
     memcpy(animation_6, marche_turque_6, sizeof(animation_6));
+     break; // Add this line
   case 5:
     // marin
     memcpy(animation_1, marin_1, sizeof(animation_1));
@@ -170,6 +175,7 @@ void setAnimation(int animationNb) {
     memcpy(animation_6, marin_6, sizeof(animation_6));
     memcpy(animation_7, marin_7, sizeof(animation_7));
     memcpy(animation_8, marin_8, sizeof(animation_8));
+     break; // Add this line
   case 6:
     // pascal
     memcpy(animation_1, pascal_1, sizeof(animation_1));
@@ -178,6 +184,7 @@ void setAnimation(int animationNb) {
     memcpy(animation_4, pascal_4, sizeof(animation_4));
     memcpy(animation_5, pascal_5, sizeof(animation_5));
     memcpy(animation_6, pascal_6, sizeof(animation_6));
+     break; // Add this line
   case 7:
     // ragtime
     memcpy(animation_1, ragtime_1, sizeof(animation_1));
@@ -186,6 +193,7 @@ void setAnimation(int animationNb) {
     memcpy(animation_4, ragtime_4, sizeof(animation_4));
     memcpy(animation_5, ragtime_5, sizeof(animation_5));
     memcpy(animation_6, ragtime_6, sizeof(animation_6));
+     break; // Add this line
   default:
     break;
   }

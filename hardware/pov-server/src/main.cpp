@@ -248,17 +248,15 @@ void loop() {
         if (currentLine.indexOf("GET /api/display/group?group=") != -1) {
           int index = currentLine.indexOf("GET /api/display/group?group=") + 29;
           // if length is 40
-          if (currentLine.length() == 117) {
-            // String of all the numbers after the =
-            String groupString = currentLine.substring(index);
-            // Convert string to an int
-            int group = groupString.toInt();
+          // String of all the numbers after the =
+          String groupString = currentLine.substring(index);
+          // Convert string to an int
+          int group = groupString.toInt();
 
-            Serial.println("Group: ");
-            Serial.println(group);
-            //set animNb to the group
-            animNb = group;
-          }
+          Serial.println("Group: ");
+          Serial.println(group);
+          //set animNb to the group
+          animNb = group;
         }
       }
     }
