@@ -72,6 +72,7 @@ const char *html = R""""(
       <p>Vitesse des L.E.D</p>
       <input type="range" min="100" max="50000" value="1000" step="500" class="slider">
       <p class="speed-value"></p>
+      <button onclick="setdelaytime(600)">vitesse a 600</button>
     </div>
     <div class="group-selector">
       <!-- Select box with defaut value 0 1c1 = 1  -->
@@ -283,6 +284,40 @@ const char *html = R""""(
           console.error('Error:', error);
         });
     });
+    speedSlider.addEventListener('touchend', () => {
+      // Fetch route GET /api/display/speed?speed= + speedSlider.value
+      fetch(`/api/animation?speed=${speedSlider.value}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    });
+
+    function setdelaytime(value) {
+      // Fetch route GET /api/display/speed?speed= + speedSlider.value
+      fetch(`/api/animation?speed=${value}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+    }
 
     //-----------------Group value selector-----------------//
     // on select change selectGroup

@@ -177,31 +177,31 @@ void loop() {
         if (currentLine.endsWith("GET /api/display/4")) {
           Serial1.println("GET /api/display/animate/4");
           liveMode = false;
-          animation = 3;
+          animation = 4;
         }
         // Set animation api/display/animate/[id]
         if (currentLine.endsWith("GET /api/display/5")) {
           Serial1.println("GET /api/display/animate/5");
           liveMode = false;
-          animation = 3;
+          animation = 5;
         }
         // Set animation api/display/animate/[id]
         if (currentLine.endsWith("GET /api/display/6")) {
           Serial1.println("GET /api/display/animate/6");
           liveMode = false;
-          animation = 3;
+          animation = 6;
         }
         // Set animation api/display/animate/[id]
         if (currentLine.endsWith("GET /api/display/7")) {
           Serial1.println("GET /api/display/animate/7");
           liveMode = false;
-          animation = 3;
+          animation = 7;
         }
         // Set animation api/display/animate/[id]
         if (currentLine.endsWith("GET /api/display/8")) {
           Serial1.println("GET /api/display/animate/8");
           liveMode = false;
-          animation = 3;
+          animation = 8;
         }
         // Change the L.E.D blink speed
         if (currentLine.indexOf("GET /api/animation?speed=") != -1) {
